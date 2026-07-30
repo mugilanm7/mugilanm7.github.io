@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mugilan Purushothaman — Technical Lead · Software Development</title>
+<meta name="description" content="Technical Lead — Software Development · Web & Mobile · AI-Assisted Engineering. 11+ years building web, mobile and data platforms.">
+<style>
+  :root{
+    --bg:#070b14;
+    --bg2:#0b1120;
+    --card:#0f1729;
+    --text:#e6ecf7;
+    --muted:#93a1bb;
+    --line:rgba(147,161,187,.16);
+    --accent:#6d8dff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  /* ambient background */
+  .glow{position:fixed;border-radius:50%;filter:blur(110px);opacity:.35;pointer-events:none;z-index:0}
+  .glow.g1{width:520px;height:520px;background:#2b3fa8;top:-160px;left:-120px}
+  .glow.g2{width:460px;height:460px;background:#5b21b6;top:30%;right:-160px}
+  .glow.g3{width:420px;height:420px;background:#065f6b;bottom:-140px;left:22%}
+  main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 22px}
+
+  /* ============ HERO ============ */
+  header{padding:72px 0 26px;text-align:center}
+  .avatar{
+    width:92px;height:92px;border-radius:50%;
+    background:linear-gradient(135deg,#6d8dff,#a855f7);
+    display:flex;align-items:center;justify-content:center;
+    font-size:2rem;font-weight:700;color:#fff;margin:0 auto 18px;
+    box-shadow:0 0 40px rgba(109,141,255,.45);
+    letter-spacing:1px;
+  }
+  h1{font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:700;letter-spacing:.5px}
+  .role{
+    margin-top:8px;font-size:clamp(1rem,2.2vw,1.2rem);font-weight:600;
+    background:linear-gradient(90deg,#7dd3fc,#a5b4fc,#d8b4fe);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .loc{color:var(--muted);margin-top:6px;font-size:.95rem}
+  .contacts{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .contacts a{
+    color:var(--text);text-decoration:none;font-size:.88rem;
+    border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    background:rgba(255,255,255,.03);transition:.25s;
+  }
+  .contacts a:hover{border-color:var(--accent);background:rgba(109,141,255,.12);transform:translateY(-2px)}
+  .summary{max-width:780px;margin:26px auto 0;color:var(--muted);font-size:.98rem}
+
+  /* stats strip */
+  .stats{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-top:30px}
+  .stat{text-align:center}
+  .stat b{font-size:1.55rem;display:block;background:linear-gradient(90deg,#7dd3fc,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:1px}
+
+  /* ============ BUBBLES ============ */
+  section{padding:44px 0}
+  .sec-title{text-align:center;font-size:1.5rem;margin-bottom:6px}
+  .sec-sub{text-align:center;color:var(--muted);font-size:.92rem;margin-bottom:26px}
+  .filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+  .filters button{
+    background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);
+    padding:8px 20px;border-radius:999px;font-size:.9rem;cursor:pointer;transition:.25s;font-family:inherit;
+  }
+  .filters button.active,.filters button:hover{color:#fff;border-color:var(--accent);background:rgba(109,141,255,.16)}
+
+  #bubbleField{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:14px;max-width:980px;margin:0 auto;
+  }
+  .bubble{
+    border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;cursor:pointer;position:relative;padding:14px;
+    border:1px solid rgba(255,255,255,.14);
+    transition:transform .3s ease, box-shadow .3s ease, opacity .4s ease;
+    animation:floaty var(--dur,7s) ease-in-out var(--del,0s) infinite;
+    user-select:none;
+  }
+  .bubble:hover{transform:scale(1.09);z-index:2}
+  .bubble .b-icon{font-size:1.45rem;line-height:1.2}
+  .bubble .b-name{font-weight:600;font-size:.8rem;line-height:1.25;margin-top:5px}
+  .bubble .b-tag{font-size:.62rem;color:rgba(255,255,255,.75);margin-top:3px;text-transform:uppercase;letter-spacing:.8px}
+  .bubble.hidden{opacity:0;transform:scale(.4);pointer-events:none;position:absolute}
+  .b-lg{width:172px;height:172px}
+  .b-md{width:142px;height:142px}
+  .b-sm{width:118px;height:118px}
+  .b-sm .b-name{font-size:.72rem}
+  .b-sm .b-icon{font-size:1.2rem}
+  @keyframes floaty{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-9px)}
+  }
+  .bubble:hover{animation-play-state:paused}
+  @media (prefers-reduced-motion:reduce){.bubble{animation:none}}
+
+  .hint{text-align:center;color:var(--muted);font-size:.85rem;margin-top:26px}
+
+  /* ============ MODAL ============ */
+  #overlay{
+    position:fixed;inset:0;background:rgba(4,7,15,.72);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:22px;
+    opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:50;
+  }
+  #overlay.open{opacity:1;pointer-events:auto}
+  #modal{
+    background:linear-gradient(160deg,#131c33,#0d1426);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;max-width:640px;width:100%;max-height:84vh;overflow-y:auto;
+    padding:34px 32px;position:relative;
+    transform:scale(.82) translateY(18px);transition:transform .28s cubic-bezier(.34,1.4,.5,1);
+    box-shadow:0 24px 80px rgba(0,0,0,.55);
+  }
+  #overlay.open #modal{transform:scale(1) translateY(0)}
+  #modal .m-close{
+    position:absolute;top:14px;right:16px;background:rgba(255,255,255,.06);border:1px solid var(--line);
+    color:var(--muted);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;
+  }
+  #modal .m-close:hover{color:#fff;border-color:var(--accent)}
+  .m-head{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+  .m-badge{
+    width:58px;height:58px;border-radius:16px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  }
+  .m-title{font-size:1.3rem;font-weight:700;line-height:1.3}
+  .m-meta{color:var(--muted);font-size:.85rem;margin-top:2px}
+  .m-desc{color:#c3cde0;font-size:.95rem;margin:16px 0 6px}
+  .m-high{list-style:none;margin:12px 0 4px}
+  .m-high li{
+    position:relative;padding-left:20px;margin-bottom:8px;color:#aab6cd;font-size:.9rem;
+  }
+  .m-high li::before{content:"◆";position:absolute;left:0;top:0;font-size:.6rem;color:var(--accent);top:6px}
+  .m-sec{font-size:.78rem;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);margin:20px 0 10px;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips span{
+    font-size:.78rem;padding:5px 12px;border-radius:999px;
+    background:rgba(109,141,255,.13);border:1px solid rgba(109,141,255,.3);color:#bcd0ff;
+  }
+  .m-link a{color:#7dd3fc;font-size:.88rem;text-decoration:none}
+  .m-link a:hover{text-decoration:underline}
+
+  /* ============ EXPERIENCE ============ */
+  .timeline{max-width:760px;margin:0 auto;position:relative;padding-left:26px}
+  .timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(#6d8dff,#a855f7,transparent)}
+  .t-item{position:relative;margin-bottom:30px}
+  .t-item::before{
+    content:"";position:absolute;left:-26px;top:7px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--accent);
+  }
+  .t-item h3{font-size:1.06rem}
+  .t-item .t-org{color:#a5b4fc;font-size:.9rem;font-weight:600}
+  .t-item .t-date{color:var(--muted);font-size:.82rem;margin-bottom:8px}
+  .t-item p{color:#aab6cd;font-size:.92rem}
+
+  /* ============ EXTRAS ============ */
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:900px;margin:0 auto}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;
+  }
+  .card h3{font-size:.95rem;margin-bottom:12px;color:#c9d5ea}
+  .card ul{list-style:none}
+  .card li{color:var(--muted);font-size:.86rem;margin-bottom:8px;padding-left:16px;position:relative}
+  .card li::before{content:"›";position:absolute;left:0;color:var(--accent)}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 44px;text-align:center;color:var(--muted);font-size:.85rem}
+  footer a{color:#7dd3fc;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+<main>
+  <header>
+    <div class="avatar">MP</div>
+    <h1>Mugilan Purushothaman</h1>
+    <div class="role">Technical Lead — Software Development · Web &amp; Mobile · AI-Assisted Engineering</div>
+    <div class="loc">📍 Dubai, UAE · Immediate Joiner</div>
+    <div class="contacts">
+      <a href="mailto:mugilanm7@gmail.com">✉️ mugilanm7@gmail.com</a>
+      <a href="tel:+971565690262">📞 +971 56 569 0262</a>
+      <a href="https://linkedin.com/in/mugilan-purushothaman" target="_blank" rel="noopener">💼 LinkedIn</a>
+    </div>
+    <p class="summary">
+      Software engineering leader with 11+ years designing, building, and delivering web and cross-platform
+      mobile applications, and 4+ years leading and mentoring development teams — owning architecture,
+      code review, and delivery across the full SDLC. Early and effective adopter of AI in the development
+      workflow, from AI-assisted engineering to production LLM/RAG and ML use cases.
+    </p>
+    <div class="stats">
+      <div class="stat"><b>11+</b><span>Years Experience</span></div>
+      <div class="stat"><b>4+</b><span>Years Leading Teams</span></div>
+      <div class="stat"><b>14+</b><span>Key Projects</span></div>
+      <div class="stat"><b>6</b><span>Certifications</span></div>
+    </div>
+  </header>
+
+  <section id="bubbles">
+    <h2 class="sec-title">Projects &amp; Skills</h2>
+    <p class="sec-sub">Tap a bubble to expand it and see what the project is and the skills I worked on.</p>
+    <div class="filters" id="filters">
+      <button data-f="all" class="active">All</button>
+      <button data-f="project">🚀 Projects</button>
+      <button data-f="skill">🛠️ Skills</button>
+    </div>
+    <div id="bubbleField" aria-live="polite"></div>
+    <p class="hint">✨ Click any bubble to expand</p>
+  </section>
+
+  <section id="experience">
+    <h2 class="sec-title">Experience</h2>
+    <p class="sec-sub">From Software Engineer to Manager, Software Engineering</p>
+    <div class="timeline">
+      <div class="t-item">
+        <h3>Manager, Software Engineering</h3>
+        <div class="t-org">Agati Clinical Informatics LLP — Bengaluru, India</div>
+        <div class="t-date">Apr 2022 – Jun 2026</div>
+        <p>Led and mentored a cross-functional development team across the end-to-end SDLC — architecture,
+        prioritization, code review, and delivery. Hands-on across C#/.NET, Blazor, ReactJS, Python, Snowflake,
+        and SQL Server/PostgreSQL. Drove team-wide adoption of AI development tools (Claude / Claude Code, OpenAI)
+        and shipped production LLM/RAG and ML use cases. Represented the team in ISO audits.</p>
+      </div>
+      <div class="t-item">
+        <h3>Technical Lead → Lead → Senior → Software Engineer</h3>
+        <div class="t-org">Agati Systems Pvt Ltd — Chennai, India</div>
+        <div class="t-date">Jan 2016 – Mar 2022</div>
+        <p>Progressed through four levels of increasing ownership over six years. Translated business needs into
+        architecture, set the team's tech stack and standards, applied Agile (Scrum/Kanban), and built software
+        modules, REST APIs, and data pipelines using C#/.NET, Java, ReactJS, Python, and SQL Server/Oracle/PostgreSQL.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="grid3">
+      <div class="card">
+        <h3>🏆 Achievements</h3>
+        <ul>
+          <li>Winner — All-India Android Development Competition, IIT Roorkee (2013)</li>
+          <li>Independently designed, built &amp; shipped Pict-o-view to the Mac App Store (2026); front page of r/macOS (6.8K+ views) at launch</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📜 Certifications</h3>
+        <ul>
+          <li>Microsoft Azure — Identity, Governance &amp; Monitoring · Data Storage · Compute &amp; App Architecture · Migration &amp; Networking (Whizlabs, 2026)</li>
+          <li>Introduction to TensorFlow for AI, ML &amp; Deep Learning — DeepLearning.AI (2020)</li>
+          <li>Core Java &amp; Advanced Java — NIIT (2014)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🎓 Education &amp; Languages</h3>
+        <ul>
+          <li>B.E., Computer Science &amp; Engineering — Kings Engineering College, Anna University (2011–2015)</li>
+          <li>English · Tamil · Hindi · Malayalam</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Built with a little help from AI · <a href="mailto:mugilanm7@gmail.com">mugilanm7@gmail.com</a> ·
+    <a href="https://linkedin.com/in/mugilan-purushothaman" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+</main>
+
+<!-- Modal -->
+<div id="overlay" role="dialog" aria-modal="true">
+  <div id="modal">
+    <button class="m-close" aria-label="Close">✕</button>
+    <div class="m-head">
+      <div class="m-badge" id="mBadge"></div>
+      <div>
+        <div class="m-title" id="mTitle"></div>
+        <div class="m-meta" id="mMeta"></div>
+      </div>
+    </div>
+    <p class="m-desc" id="mDesc"></p>
+    <ul class="m-high" id="mHigh"></ul>
+    <div class="m-sec" id="mChipsLabel">Skills I worked on</div>
+    <div class="chips" id="mChips"></div>
+    <div class="m-link" id="mLink" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<script>
+const ITEMS = [
+  /* ---------------- PROJECTS ---------------- */
+  {type:"project", size:"lg", icon:"🖼️", name:"Pict-o-view", tag:"Mac App Store · 2026",
+   meta:"Solo developer — designer, engineer & publisher · AI-assisted (Claude) development",
+   grad:["#6366f1","#a855f7"],
+   desc:"A lightweight, privacy-first native macOS photo & video viewer — a folder-scoped alternative to import-based photo libraries: fully sandboxed, reading only user-granted folders with no disk indexing, accounts, or analytics. ~10,400 lines of Swift across 34 files.",
+   high:[
+     "Instant paging through large photo folders, including RAW files, with layered thumbnail/preview caches",
+     "Folder-scoped library via security-scoped bookmarks with live FSEvents folder-watching",
+     "Non-destructive rotate/crop with export, video scrubbing, variable speed and Picture-in-Picture",
+     "Native MKV/Matroska playback engine built on libavformat feeding VideoToolbox/CoreAudio (no transcoding)",
+     "Managed the full App Store release lifecycle and passed App Review; front page of r/macOS at launch"
+   ],
+   tech:["Swift","SwiftUI","AppKit","AVFoundation","Core Image","Image I/O","VideoToolbox","CoreAudio","FSEvents","App Sandbox","Code signing & notarization","Claude Code"],
+   link:{label:"View on the Mac App Store →", url:"https://apps.apple.com/app/pict-o-view"}},
+
+  {type:"project", size:"lg", icon:"❄️", name:"Cloud Data Warehouse & EDC Platform", tag:"Architect",
+   meta:"Architect / Lead Developer · Clinical data engineering",
+   grad:["#0ea5e9","#2563eb"],
+   desc:"Designed and delivered a scalable cloud-native data warehouse on Snowflake that integrates clinical-trial data from multiple Electronic Data Capture (EDC) systems into a unified, analytics-ready model.",
+   high:[
+     "Architected a Snowflake warehouse integrating Medidata Rave, Medrio and Veeva Vault EDC into a CDISC-aligned model",
+     "Built serverless, incremental ETL pipelines on Azure Functions (Azure Blob staging) in Python and SAS",
+     "Delivered full computer-system-validation artifacts with audit trail for 21 CFR Part 11 compliance",
+     "Delivered Power BI dashboards for stakeholder analytics and KPI tracking"
+   ],
+   tech:["Snowflake","Azure Functions","Azure Blob Storage","Python","SAS","Power BI","Medidata Rave","Medrio","Veeva Vault EDC"]},
+
+  {type:"project", size:"lg", icon:"🧬", name:"Clinical Data Standardization Platform", tag:"Full-Stack Architect",
+   meta:"Full-Stack Architect / Developer",
+   grad:["#8b5cf6","#6d28d9"],
+   desc:"Architected a full-stack platform that converts disparate clinical data formats into industry-compliant CDISC models, with a modular, configuration-driven pipeline.",
+   high:[
+     "Built .NET Core RESTful APIs and a modular, dynamic ReactJS front-end backed by Python transformation pipelines",
+     "Persisted data across PostgreSQL and MongoDB for both structured and document-oriented clinical data",
+     "Deployed on Azure App Service with CI/CD via Azure DevOps and GitHub Actions"
+   ],
+   tech:[".NET Core","ReactJS","Python","PostgreSQL","MongoDB","Azure App Service","Azure DevOps","GitHub Actions"]},
+
+  {type:"project", size:"md", icon:"🫀", name:"Pediatric Cardiac Safety App", tag:"Lead Engineer",
+   meta:"Lead Software Engineer — authored URS, led design",
+   grad:["#ec4899","#be185d"],
+   desc:"Enterprise clinical data-capture platform pairing a web application for configuring clinical studies, visits/events, forms and questions with a cross-platform iOS/Android app for screening and follow-up responses.",
+   high:[
+     "Role-based access control with study-level user assignment and multi-user concurrent sessions",
+     "Full audit-trail capture, electronic signatures, and 21 CFR Part 11 regulatory compliance",
+     "SSL-secured access, session timeouts, password policies; authored the User Requirement Specification"
+   ],
+   tech:[".NET Core","ReactJS","iOS/Android","SQL Server","REST APIs"]},
+
+  {type:"project", size:"md", icon:"📋", name:"Specification Management System", tag:"Full-Stack",
+   meta:"Full-Stack Developer",
+   grad:["#14b8a6","#0f766e"],
+   desc:"Enterprise system for creating, versioning and approving clinical-trial specifications with complete audit trails and electronic signatures.",
+   high:[
+     "Delivered a .NET Core backend exposing RESTful APIs, a ReactJS front-end, and SQL Server / MySQL persistence",
+     "Validated and documented in compliance with 21 CFR Part 11, including Validation Plan and traceability matrix"
+   ],
+   tech:[".NET Core","ReactJS","SQL Server","MySQL","Git","Azure DevOps"]},
+
+  {type:"project", size:"sm", icon:"📈", name:"Performance Portal", tag:".NET · 2025",
+   meta:".NET Developer (individual project) · 2025",
+   grad:["#f59e0b","#d97706"],
+   desc:"Digitized a manual, Excel-based employee performance-review process into a hosted web application with a multi-level rating and approval workflow (L1 and L2 reviewers), deployed on Azure with SSO login.",
+   high:[],
+   tech:[".NET","C#","Syncfusion Blazor","Azure","SSO"]},
+
+  {type:"project", size:"sm", icon:"💹", name:"ARIA — Finance Reconciliation", tag:".NET · 2026",
+   meta:".NET Developer (individual project) · 2026",
+   grad:["#22c55e","#15803d"],
+   desc:"Finance-team application automating reconciliation across three source Excel files (site, invoice and final): matching invoice IDs, validating site-vs-invoice sum totals, and auto-populating the consolidated final file — replacing a fully manual Excel process.",
+   high:[],
+   tech:[".NET","C#","Syncfusion Blazor"]},
+
+  {type:"project", size:"sm", icon:"📦", name:"Panel Management App", tag:"Mobile",
+   meta:"Mobile utility with Dropbox integration",
+   grad:["#3b82f6","#1d4ed8"],
+   desc:"Mobile application for managing panel information, integrating with Dropbox for source data and image storage.",
+   high:[
+     "Reads project Excel files from Dropbox and generates a QR code per panel",
+     "QR scanning or manual lookup displays panel info; users update comments and photos per panel"
+   ],
+   tech:["Mobile","Dropbox API","QR codes"]},
+
+  {type:"project", size:"md", icon:"🛡️", name:"Insurance Product Suite", tag:"Backend",
+   meta:"Backend Developer",
+   grad:["#f43f5e","#9f1239"],
+   desc:"High-performance insurance application built on Java Spring Boot microservices with an Oracle database managing complex policy, claims and customer data, exposed through documented REST APIs.",
+   high:[],
+   tech:["Java","Spring Boot","Oracle","REST APIs","Swagger/OpenAPI","Microservices"]},
+
+  {type:"project", size:"sm", icon:"🧾", name:"POS Restaurant Billing", tag:"C#/WPF",
+   meta:"Developer",
+   grad:["#a3e635","#4d7c0f"],
+   desc:"Touch-screen point-of-sale billing product for restaurants, built on C#/WPF with a SQL Server back-end for menu, order and billing management.",
+   high:[],
+   tech:["C#","WPF","SQL Server"]},
+
+  {type:"project", size:"lg", icon:"📱", name:"Mobile Apps — Native & Hybrid", tag:"iOS · Android",
+   meta:"iOS Swift · Android Kotlin · React Native · Ionic/Cordova",
+   grad:["#06b6d4","#0e7490"],
+   desc:"Designed, developed and shipped consumer and enterprise mobile applications across native and hybrid stacks, focused on performance, accessibility, and offline-first experiences.",
+   high:[
+     "Audiobooks — cross-platform streaming & playback with offline downloads, bookmarks, sleep timer and DRM-protected content",
+     "SpeechTherapy — native app for speech-language pathologists and patients with guided exercises, audio recording and therapist dashboards",
+     "PartsFinder — enterprise inventory & spare-parts lookup with barcode/QR scanning and offline-capable local caching"
+   ],
+   tech:["Swift","SwiftUI","Kotlin","React Native","Ionic/Cordova","Offline-first design","Native audio APIs"]},
+
+  {type:"project", size:"md", icon:"🌡️", name:"IoT on Raspberry Pi", tag:"Edge + Cloud",
+   meta:"Python · Edge + Cloud",
+   grad:["#d946ef","#86198f"],
+   desc:"Built end-to-end IoT solutions on Raspberry Pi using Python, integrating sensors, edge processing, and cloud connectivity to Azure for telemetry and analytics.",
+   high:[
+     "Smart Environment Monitor — temperature, humidity and air-quality readings via GPIO sensors streaming to Azure IoT Hub with real-time dashboards and threshold alerts",
+     "Connected Device Controller — lightweight REST/MQTT control plane enabling remote configuration and secure device-to-cloud communication"
+   ],
+   tech:["Raspberry Pi","Python","GPIO sensors","Azure IoT Hub","MQTT","Edge processing"]},
+
+  {type:"project", size:"sm", icon:"🚌", name:"Eazy TransPort", tag:"Platform",
+   meta:"Software Developer",
+   grad:["#eab308","#a16207"],
+   desc:"A hardware/software/mobile platform to manage company and school transport systems, driving efficiency and cost savings — including an efficient route-optimization algorithm that reduces trip distance.",
+   high:["Developed the Python code for the hardware per requirements","Performed unit and integration testing of owned use cases"],
+   tech:["Python","HTML","JavaScript","jQuery","PHP","Android"]},
+
+  {type:"project", size:"sm", icon:"🏠", name:"Home Security System", tag:"Automation",
+   meta:"Software Developer",
+   grad:["#64748b","#334155"],
+   desc:"Residential building-automation system for control of lighting, heating (smart thermostats), security and appliances over WiFi — switches and sensors connected to a central gateway controlled via wall terminal, mobile, tablet or web through cloud services.",
+   high:["Developed the Python code for the hardware","Developed the JavaScript integration code"],
+   tech:["Python","JavaScript","HTML","jQuery","PHP","Android"]},
+
+  /* ---------------- SKILLS ---------------- */
+  {type:"skill", size:"lg", icon:"🤖", name:"AI / ML & AI-Assisted Dev", tag:"Skill",
+   meta:"Early and effective adopter of AI in the development workflow",
+   grad:["#a855f7","#6d28d9"],
+   desc:"From AI-assisted engineering to production LLM/RAG and ML use cases — turning modern AI into real business value.",
+   high:[
+     "AI-assisted development with Claude Code as a daily engineering workflow",
+     "LLM API integration (Anthropic/OpenAI) with prompt tuning and token-cost optimization",
+     "RAG pipelines — chunking, vector stores, evaluation",
+     "Identifying & implementing AI/ML use cases; TensorFlow (ML foundations)"
+   ],
+   tech:["Claude Code","Anthropic API","OpenAI API","RAG","Prompt engineering","TensorFlow"]},
+
+  {type:"skill", size:"lg", icon:"⚙️", name:"Backend", tag:"Skill",
+   meta:"11+ years of server-side engineering",
+   grad:["#6366f1","#4338ca"],
+   desc:"Designing and building APIs, microservices and data-processing pipelines for enterprise, clinical, insurance and finance systems.",
+   high:[],
+   tech:["C#","ASP.NET Core & MVC",".NET / .NET Core","Blazor (Syncfusion)","Java (Spring Boot)","PHP","Web API","REST (Swagger/OpenAPI)","Microservices","Entity Framework"]},
+
+  {type:"skill", size:"lg", icon:"🎨", name:"Frontend & Mobile", tag:"Skill",
+   meta:"Web, native iOS/macOS, and cross-platform mobile",
+   grad:["#06b6d4","#0369a1"],
+   desc:"Building responsive web front-ends and native/cross-platform mobile apps with a focus on performance and accessibility.",
+   high:[],
+   tech:["React","ReactJS","React Native","JavaScript","TypeScript","jQuery","Swift","SwiftUI","AppKit","Kotlin","Flutter","Ionic/Cordova"]},
+
+  {type:"skill", size:"md", icon:"🗄️", name:"Databases", tag:"Skill",
+   meta:"Schema design, stored procedures, query & performance tuning",
+   grad:["#0ea5e9","#0c4a6e"],
+   desc:"Relational and NoSQL data modeling with deep experience in performance tuning — indexes, stored procedures, and slow-query diagnosis.",
+   high:[],
+   tech:["MS SQL Server","PostgreSQL","Oracle","MySQL","MongoDB","Snowflake"]},
+
+  {type:"skill", size:"md", icon:"☁️", name:"Cloud & DevOps", tag:"Skill",
+   meta:"Azure-certified across four solution areas (2026)",
+   grad:["#2563eb","#1e3a8a"],
+   desc:"Deploying and operating cloud workloads with automated CI/CD, containers, and secure identity.",
+   high:[],
+   tech:["Azure App Service","Azure Functions","Azure IoT Hub","Azure DevOps","SSO / Azure AD","Docker","Kubernetes","CI/CD","GitHub Actions","Git","Unit testing","Code signing & notarization"]},
+
+  {type:"skill", size:"md", icon:"📊", name:"Data, Cloud & Compliance", tag:"Skill",
+   meta:"Clinical data engineering under 21 CFR Part 11",
+   grad:["#14b8a6","#115e59"],
+   desc:"Cloud data warehousing and regulated-industry delivery — EDC integrations, CDISC data models, and full computer-system validation.",
+   high:[],
+   tech:["Snowflake","Azure Functions ETL","Azure Blob Storage","Power BI","SAS","EDC (Medidata Rave, Medrio, Veeva Vault)","CDISC","21 CFR Part 11","IQ/OQ/PQ, UAT"]},
+
+  {type:"skill", size:"md", icon:"👥", name:"Leadership & Delivery", tag:"Skill",
+   meta:"4+ years leading and mentoring development teams",
+   grad:["#f59e0b","#b45309"],
+   desc:"Owning delivery across the full SDLC — from requirements to release — while growing engineers and representing engineering to stakeholders and auditors.",
+   high:[],
+   tech:["Team leadership","Mentoring & coaching","Code review","Tech direction & tool selection","Agile / Scrum / Kanban","Stakeholder management","ISO audit representation","Project tracking & reporting"]},
+
+  {type:"skill", size:"sm", icon:"📡", name:"IoT & Edge", tag:"Skill",
+   meta:"Device-to-cloud telemetry",
+   grad:["#d946ef","#701a75"],
+   desc:"End-to-end IoT: sensors and edge processing on-device, secure telemetry to the cloud.",
+   high:[],
+   tech:["Raspberry Pi","GPIO sensors","Edge processing","Azure IoT Hub","MQTT"]}
+];
+
+const field = document.getElementById("bubbleField");
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+
+ITEMS.forEach((it, i) => {
+  const b = document.createElement("div");
+  b.className = `bubble b-${it.size}`;
+  b.dataset.type = it.type;
+  b.dataset.idx = i;
+  b.style.background = `radial-gradient(circle at 32% 28%, ${it.grad[0]}cc, ${it.grad[1]}e6)`;
+  b.style.boxShadow = `0 8px 30px ${it.grad[1]}55`;
+  b.style.setProperty("--dur", (6 + (i % 5)) + "s");
+  b.style.setProperty("--del", ((i * 0.37) % 3).toFixed(2) + "s");
+  b.setAttribute("role","button");
+  b.setAttribute("tabindex","0");
+  b.setAttribute("aria-label", it.name + " — click to expand");
+  b.innerHTML = `<div class="b-icon">${it.icon}</div><div class="b-name">${it.name}</div><div class="b-tag">${it.tag}</div>`;
+  b.addEventListener("click", () => openModal(i));
+  b.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){e.preventDefault();openModal(i);} });
+  field.appendChild(b);
+});
+
+function openModal(i){
+  const it = ITEMS[i];
+  document.getElementById("mBadge").style.background = `linear-gradient(135deg, ${it.grad[0]}, ${it.grad[1]})`;
+  document.getElementById("mBadge").textContent = it.icon;
+  document.getElementById("mTitle").textContent = it.name;
+  document.getElementById("mMeta").textContent = it.meta;
+  document.getElementById("mDesc").textContent = it.desc;
+  const high = document.getElementById("mHigh");
+  high.innerHTML = it.high.map(h => `<li>${h}</li>`).join("");
+  document.getElementById("mChipsLabel").textContent = it.type === "project" ? "Skills I worked on" : "What this covers";
+  document.getElementById("mChips").innerHTML = it.tech.map(t => `<span>${t}</span>`).join("");
+  const link = document.getElementById("mLink");
+  link.innerHTML = it.link ? `<a href="${it.link.url}" target="_blank" rel="noopener">${it.link.label}</a>` : "";
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(){
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+overlay.addEventListener("click", e => { if(e.target === overlay) closeModal(); });
+modal.querySelector(".m-close").addEventListener("click", closeModal);
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+/* filters */
+document.getElementById("filters").addEventListener("click", e => {
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.remove("active"));
+  btn.classList.add("active");
+  const f = btn.dataset.f;
+  document.querySelectorAll(".bubble").forEach(b => {
+    b.classList.toggle("hidden", f !== "all" && b.dataset.type !== f);
+  });
+});
+</script>
+</body>
+</html>
