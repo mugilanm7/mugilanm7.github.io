@@ -147,7 +147,7 @@
     <img class="photo" src="images/mugilan.JPG" alt="Mugilan Purushothaman">
     <h1>Mugilan Purushothaman</h1>
     <div class="role">Technical Lead — Software Development · Web &amp; Mobile · AI-Assisted Engineering</div>
-    <div class="loc">Dubai, UAE · Immediate Joiner</div>
+    <div class="loc">Dubai, UAE</div>
     <div class="contacts">
       <a href="mailto:mugilanm7@gmail.com">mugilanm7@gmail.com</a>
       <a href="https://linkedin.com/in/mugilan-purushothaman" target="_blank" rel="noopener">LinkedIn</a>
@@ -268,7 +268,7 @@ const ITEMS = [
      "Managed the full App Store release lifecycle and passed App Review; front page of r/macOS at launch"
    ],
    tech:["Swift","SwiftUI","AppKit","AVFoundation","Core Image","Image I/O","VideoToolbox","CoreAudio","FSEvents","App Sandbox","Code signing & notarization","Claude Code"],
-   link:{label:"View on the Mac App Store →", url:"https://apps.apple.com/app/pict-o-view"}},
+   links:[{label:"Visit the Pict-o-view site →", url:"https://mugilanm7.github.io/g-mac/"}]},
 
   {type:"project", size:"lg", icon:"❄️", name:"Cloud Data Warehouse & EDC Platform", tag:"Architect",
    meta:"Architect / Lead Developer · Clinical data engineering",
@@ -484,7 +484,7 @@ function openModal(i){
   document.getElementById("mHigh").innerHTML = it.high.map(h => `<li>${h}</li>`).join("");
   document.getElementById("mChipsLabel").textContent = it.type === "project" ? "Skills I worked on" : "What this covers";
   document.getElementById("mChips").innerHTML = it.tech.map(t => `<span>${t}</span>`).join("");
-  document.getElementById("mLink").innerHTML = it.link ? `<a href="${it.link.url}" target="_blank" rel="noopener">${it.link.label}</a>` : "";
+  document.getElementById("mLink").innerHTML = (it.links || []).map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(" · ");
   overlay.classList.add("open");
   document.body.style.overflow = "hidden";
 }
