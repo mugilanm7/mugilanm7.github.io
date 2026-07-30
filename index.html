@@ -35,6 +35,13 @@
     text-transform:uppercase;letter-spacing:2.2px;
   }
   .loc{color:var(--muted);margin-top:8px;font-size:.94rem}
+  .creator{
+    display:inline-block;margin-top:14px;font-size:.9rem;color:#4b5563;
+    border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 18px;
+    box-shadow:0 2px 8px rgba(35,39,47,.05);
+  }
+  .creator a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+  .creator a:hover{opacity:.75}
   .contacts{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .contacts a{
     color:var(--ink);text-decoration:none;font-size:.88rem;
@@ -148,19 +155,20 @@
     <h1>Mugilan Purushothaman</h1>
     <div class="role">Technical Lead — Software Development · Web &amp; Mobile · AI-Assisted Engineering</div>
     <div class="loc">Dubai, UAE</div>
+    <div><span class="creator">🖼️ Creator of <a href="https://mugilanm7.github.io/g-mac/" target="_blank" rel="noopener">Pict-o-view</a> — a native macOS photo &amp; video viewer</span></div>
     <div class="contacts">
       <a href="mailto:mugilanm7@gmail.com">mugilanm7@gmail.com</a>
       <a href="https://linkedin.com/in/mugilan-purushothaman" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <p class="summary">
       Software engineering leader with 11+ years designing, building, and delivering web and cross-platform
-      mobile applications, and 4+ years leading and mentoring development teams — owning architecture,
+      mobile applications, and 6+ years leading and mentoring development teams — owning architecture,
       code review, and delivery across the full SDLC. Early and effective adopter of AI in the development
       workflow, from AI-assisted engineering to production LLM/RAG and ML use cases.
     </p>
     <div class="stats">
       <div class="stat"><b>11+</b><span>Years Experience</span></div>
-      <div class="stat"><b>4+</b><span>Years Leading Teams</span></div>
+      <div class="stat"><b>6+</b><span>Years Leading Teams</span></div>
       <div class="stat"><b>14+</b><span>Key Projects</span></div>
       <div class="stat"><b>6</b><span>Certifications</span></div>
     </div>
@@ -436,7 +444,7 @@ const ITEMS = [
    tech:["Snowflake","Azure Functions ETL","Azure Blob Storage","Power BI","SAS","EDC (Medidata Rave, Medrio, Veeva Vault)","CDISC","21 CFR Part 11","IQ/OQ/PQ, UAT"]},
 
   {type:"skill", size:"md", icon:"👥", name:"Leadership & Delivery", tag:"Skill",
-   meta:"4+ years leading and mentoring development teams",
+   meta:"6+ years leading and mentoring development teams",
    c:"#b97c22",
    desc:"Owning delivery across the full SDLC — from requirements to release — while growing engineers and representing engineering to stakeholders and auditors.",
    high:[],
